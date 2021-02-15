@@ -19,5 +19,8 @@
   vars:
     users: "{{ users }}"
 
+- name: Git
+  include_tasks: git.yml
+
 - name: Virtualization
   include_tasks: virtualization.yml
