@@ -1,0 +1,35 @@
+---
+- name: Install KVM
+  become: true
+  package:
+    name: qemu-kvm
+    state: present
+- name: Add user to kvm group
+  become: true
+  user:
+    name: matthias
+    groups: kvm
+    append: yes
+- name: Install Qemu
+  become: true
+  package:
+    name: qemu-system-x86
+    state: present
+- name: Create a symbolic link
+  become: true
+  ansible.builtin.file:
+    src: /usr/bin/qemu-system-x86_64
+    dest: /usr/bin/qemu
+    owner: root
+    group: root
+    state: link
+- name: Install Qemu Gnome
+  become: true
+  package:
+    name: virt-manager
+    state: present
+- name: Install Vagrant for Provisioning
+  become: true
+  package:
+    name: vagrant
+    state: present
