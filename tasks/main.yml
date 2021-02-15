@@ -1,0 +1,20 @@
+---
+- name: Install wget
+  become: true
+  package:
+    name: 
+      - wget
+      - curl
+      - tmux
+      - zsh
+    state: present
+- name: Configure tmux
+  ansible.builtin.copy:
+    src: "{{ role_path }}/files/.tmux.conf"
+    dest: ~/.tmux.conf
+    mode: '0644'
+- name: configure and setup zsh
+  include_role: 
+    name: gantsign.antigen
+  vars:
+    users: "{{ users }}"
