@@ -3,7 +3,6 @@ This is my simple work env desktop setup for linux
 
 ```yaml
 ---
-# This playbook is to seupt the complete CGM env
 
 - hosts: localhost
   roles:
