@@ -10,6 +10,17 @@
     name: matthias
     groups: kvm
     append: yes
+- name: Ensure group "libvirtd" exists
+  become: true
+  ansible.builtin.group:
+    name: libvirtd
+    state: present
+- name: Add user to libvirtd group
+  become: true
+  user:
+    name: matthias
+    groups: libvirtd
+    append: yes
 - name: Install Qemu
   become: true
   package:
@@ -28,6 +39,10 @@
   package:
     name: virt-manager
     state: present
+- name: Start service libvirtd, if not started
+  ansible.builtin.service:
+    name: libvirtd
+    state: started
 - name: Install Vagrant for Provisioning
   become: true
   package:
